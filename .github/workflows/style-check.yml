@@ -24,4 +24,4 @@ jobs:
         run: python -m pip install pycodestyle
       # Check style
       - name: style-check
-        run: pycodestyle . --exclude venv
+        run: pycodestyle . --max-line-length=120 --exclude venv
