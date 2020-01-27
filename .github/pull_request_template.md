@@ -11,6 +11,6 @@ Please add a description about this work:
 
 The code:
 
-- [] Follows the industry standards.
-- [] Doesn't fails on execution.
-- [] Is well written and self-documented.
+- [ ] Follows the industry standards.
+- [ ] Doesn't fail on execution.
+- [ ] Is well written and self-documented.
