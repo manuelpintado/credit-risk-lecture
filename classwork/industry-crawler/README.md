@@ -99,3 +99,9 @@ $ python main.py search --title 'no classifiable'
     }
 ]
 ```
+
+## Visuals
+
+![SEARCH-ART](resources/sample-search-art.png)
+
+![SEARCH-SERVICE](resources/sample-search-service.png)
