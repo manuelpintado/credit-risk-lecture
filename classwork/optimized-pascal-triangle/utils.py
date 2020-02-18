@@ -12,13 +12,15 @@ def timeit(logger):
             output = func(*args, **kwargs)
             logger.info("Execution time %s" % (time.time() - start))
             return output
-        return wrapper
-    return decorator
 
+        return wrapper
+
+    return decorator
 
 
 def _lazy_wrapper(value):
     return lambda: value
+
 
 def caching(func):
     cache = {}
@@ -30,7 +32,9 @@ def caching(func):
             return cache[key]
         cache[key] = func(self, **kwargs)
         return wrapper(self, **kwargs)
+
     return wrapper
+
 
 class TriangleBuilder:
     CACHE = {}

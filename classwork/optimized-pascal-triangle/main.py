@@ -8,6 +8,7 @@ logger = logging.getLogger(__name__)
 
 class Main(object):
     _builder = TriangleBuilder()
+
     @caching
     def _get_element(self, i: int, j: int):
         return 1 if (j >= i or j == 0) else \
