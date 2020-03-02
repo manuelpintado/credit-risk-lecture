@@ -2,6 +2,7 @@ import functools
 import json
 
 
+
 def pretty_print(logger, serializer_function=lambda obj: obj.__dict__):
     def decorator(func):
         @functools.wraps(func)
