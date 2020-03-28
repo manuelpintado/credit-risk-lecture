@@ -12,26 +12,20 @@ class Amortization:
 
     @property
     def annuity(self) -> float:
-        return np.round(self.amount / ((1 - (1 + self.interest) ** -self.n) / self.interest), 2)
+        return self.amount / ((1 - (1 + self.interest) ** -self.n) / self.interest)
 
     def get_table(self, show: int = 0, save: str = '') -> pd.DataFrame:
         table = pd.DataFrame(columns=['t', 'B', 'P', 'I', 'A'])
-        table.t = np.arange(1, self.n + 1).astype(int)
+        table.t = np.arange(0, self.n + 1).astype(int)
         table.A[1:] = self.annuity
         next_principal = 0
         for i in table.index:
             if i == 0:
                 table.loc[i, 'B'] = self.amount
-                interest = np.round(self.amount * self.interest, 2)
-                next_principal = np.round(self.annuity - interest, 2)
-            elif i == 1:
-                table.loc[i, 'B'] = np.round(table.B.iloc[i - 1] - next_principal, 2)
-                table.loc[i, 'I'] = np.round(table.B.iloc[i - 1] * self.interest, 2)
-                table.loc[i, 'P'] = np.round(self.annuity - table.I.iloc[i], 2)
             else:
-                table.loc[i, 'B'] = np.round(table.B.iloc[i - 1] - table.P.iloc[i - 1], 2)
-                table.loc[i, 'I'] = np.round(table.B.iloc[i - 1] * self.interest, 2)
-                table.loc[i, 'P'] = np.round(self.annuity - table.I.iloc[i], 2)
+                table.loc[i, 'I'] = table.B.iloc[i - 1] * self.interest
+                table.loc[i, 'P'] = self.annuity - table.I.iloc[i]
+                table.loc[i, 'B'] = table.B.iloc[i - 1] - table.P.iloc[i]
         if show > 0:
             pd.options.display.float_format = '${:,.2f}'.format
             print(table.head(show))
