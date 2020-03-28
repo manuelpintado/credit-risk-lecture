@@ -18,7 +18,6 @@ class Amortization:
         table = pd.DataFrame(columns=['t', 'B', 'P', 'I', 'A'])
         table.t = np.arange(0, self.n + 1).astype(int)
         table.A[1:] = self.annuity
-        next_principal = 0
         for i in table.index:
             if i == 0:
                 table.loc[i, 'B'] = self.amount
