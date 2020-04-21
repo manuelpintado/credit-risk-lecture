@@ -35,8 +35,8 @@ You can define how to save your model as a JSON file. Feel free to use the struc
 
 ```json
 {
-  "target_column": "max_temp",
-  "add_intercept": "intercept",
+  "target_column": "...",
+  "add_intercept": "...",
   "predictors": [
     ...
   ],
