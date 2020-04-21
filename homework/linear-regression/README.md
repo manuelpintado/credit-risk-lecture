@@ -152,3 +152,9 @@ linear_model = LinearRegression.load("model-example.json")
 - [ ] You can evaluate a previously saved linear regression via the python object.
 - [ ] Model is saved using a JSON file.
 - [ ] You can get results (evaluation) as a csv-file.
+
+**Note**: If your implementation runs different than the examples on this file, create a `RUN.md` markdown file with the instructions on how to execute your program with the following sections: 
+* `Commandline`: as if it were run with `python main.py ...`
+* `Python object`: as if it were used by another python program. 
+
+Show how to `train`/`save`/`evaluate`/`load` your model. 
