@@ -1,0 +1,1 @@
+{"target_column": "max_temp", "add_intercept": "bias", "predictors": ["min_temp", "yr", "mo", "da", "bias"], "weights": [0.9215156917914046, 0.4195792122670732, -0.0549712239687948, -0.0020882070429922264, -7.325262870787976]}

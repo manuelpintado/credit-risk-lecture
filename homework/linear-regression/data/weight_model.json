@@ -1,0 +1,1 @@
+{"target_column": "weight", "add_intercept": "bias", "predictors": ["height", "bias"], "weights": [7.717287640774824, -350.7371918114365]}
