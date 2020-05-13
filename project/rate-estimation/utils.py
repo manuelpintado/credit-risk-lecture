@@ -4,12 +4,12 @@ import pickle
 import string
 from typing import Callable, List, Optional
 
-import jax.numpy as np
+import numpy as np
 from google.oauth2.credentials import Credentials
 from googleapiclient.discovery import build
 from google_auth_oauthlib.flow import InstalledAppFlow
 from google.auth.transport.requests import Request
-
+from models.finance import Amortization
 
 from settings import (
     EXPECTED_RATE_GOOGLE_SHEET_SERVICE_NAME,
@@ -78,3 +78,24 @@ def get_spreadsheet_column_names(column_index_max: int, ref_cols: Optional[List[
         return ref_cols[:column_index_max]
     cols = ref_cols + [col + new_col for col in ref_cols for new_col in string.ascii_uppercase]
     return get_spreadsheet_column_names(column_index_max, ref_cols=cols)
+
+
+def search(amount: int, n: int, samples: int, client_min: float, client_max: float,
+           prob_of_default: float, loss_given_default: float):
+    features = np.random.uniform(client_min, client_max, samples)
+    X = []
+    Y = []
+    for i in range(samples):
+        Amortization.rate = features[i]
+        X.append([features[i] ** 2, features[i], 1])
+        a = Amortization(amount, features[i], n)
+        irr = a.expected_irr(prob_of_default, loss_given_default)
+        Y.append((0 - irr) ** 2)
+
+    position = Y.index(min(Y))  # X[Y.index(min(Y))][1]
+    if position == 0 or position == samples-1:
+        return X[position][1]
+    X_adj = [X[position - 1], X[position], X[position + 1]]
+    Y_adj = [Y[position - 1], Y[position], Y[position + 1]]
+    w = np.linalg.inv(X_adj).dot(Y_adj)
+    return -w[1]/(2*w[0])
